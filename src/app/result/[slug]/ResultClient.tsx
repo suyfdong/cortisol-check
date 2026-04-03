@@ -94,22 +94,25 @@ export function ResultClient({ persona }: ResultClientProps) {
         </h1>
       </motion.div>
 
-      {/* Card */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-      >
-        <CortisolCard persona={persona} cardRef={cardRef} />
-      </motion.div>
+      {/* Desktop: side-by-side layout / Mobile: stacked */}
+      <div className="w-full max-w-4xl flex flex-col lg:flex-row lg:items-start lg:justify-center gap-6 lg:gap-10">
+        {/* Card */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="flex-shrink-0 mx-auto lg:mx-0"
+        >
+          <CortisolCard persona={persona} cardRef={cardRef} />
+        </motion.div>
 
-      {/* Actions */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="w-full max-w-[400px] md:max-w-[440px] mt-6 space-y-3"
-      >
+        {/* Actions */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="w-full max-w-[400px] md:max-w-[440px] lg:max-w-[360px] mx-auto lg:mx-0 space-y-3"
+        >
         {/* Download */}
         <button
           onClick={handleDownload}
@@ -239,6 +242,7 @@ export function ResultClient({ persona }: ResultClientProps) {
           AD SPACE
         </div>
       </motion.div>
+      </div>
     </div>
   );
 }
