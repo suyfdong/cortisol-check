@@ -8,15 +8,19 @@
 - Tailwind CSS v4（`@theme inline` 语法定义设计变量）
 - framer-motion（页面切换动画）
 - html-to-image（卡片导出为 PNG）
-- 部署目标：Cloudflare Pages
+- 部署：Cloudflare Pages（Static HTML Export，push to main 自动部署）
+- 域名：cortisollevel.xyz
 
 ## 重要：开发注意事项
 
 - **必须用 `npm run dev`**（已配置 `--webpack`），不要用 turbopack，会内存爆炸
 - **不要写任何健康/医学内容**，这是娱乐工具不是医疗站，避免触发 Google YMYL
-- 全站纯静态，无后端、无数据库、无用户系统
+- **GA4 已接入**（`G-3J422JZE41`），通过 `next/script` 的 `afterInteractive` 加载
+- 全站纯静态（`output: "export"`），无后端、无数据库、无用户系统
+- sitemap 是静态文件（`public/sitemap.xml`），不能用 Next.js 动态 sitemap 路由（静态导出不支持）
 - 所有结果页通过 `generateStaticParams` 预渲染
 - 移动端优先设计（90%+ 用户来自 TikTok/Instagram）
+- 结果页桌面端采用双栏布局（lg:flex-row）
 
 ## 项目结构
 
@@ -27,8 +31,7 @@ src/
 ├── components/
 │   ├── CortisolCard.tsx      # 分享卡片（渐变背景 + meter + emoji + 描述 + 数据）
 │   ├── CortisolMeter.tsx     # 仪表盘（5色块分段 + CORTISOL文字 + 指针 + glitch模式）
-│   ├── MeterPreview.tsx      # 落地页动画仪表盘
-│   └── StatBar.tsx           # [废弃] 已被圆形数据块替代，可删除
+│   └── MeterPreview.tsx      # 落地页动画仪表盘
 ├── app/
 │   ├── layout.tsx            # 根布局（Outfit + JetBrains Mono 字体、meta、footer）
 │   ├── globals.css           # 全局样式（暗色主题、noise overlay、动画 keyframes）
